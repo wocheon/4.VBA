@@ -1,0 +1,62 @@
+'급하게 짜느라 난잡하므로 시간나는경우에 코드 간단하게 바꾸기
+Sub concentrate()
+
+'#변수선언
+Dim i, i2, i3 As Integer
+Dim tbl_num, col_num, val_num  As Integer
+Dim count1, count2 As Integer
+Dim TotalMessage, TotalMessage2 As String
+Dim Border, Border2 As String
+
+'#변수 설정
+tbl_num = Cells(3, 5) + 12
+col_num = Cells(4, 5) + 12
+val_num = Cells(5, 5) + 12
+
+Cells(6, 8).Values = tbl_num
+Cells(7, 8).Values = col_num
+Cells(8, 8).Values = val_num
+Border = ","
+count1 = 0
+
+'# For문 1 column
+For i = 12 To col_num
+    count1 = count1 + 1
+    If count1 = Cells(4, 5) Then
+        Border = ""
+    End If
+    TotalMessage = TotalMessage + Cells(i, 2) + Border
+Next i
+
+'# For문 2 select column
+Border2 = ","
+count2 = 0
+
+For i3 = 12 To val_num
+    count2 = count2 + 1
+    If count2 = Cells(5, 5) Then
+        Border2 = ""
+    End If
+    TotalMessage2 = TotalMessage2 + Cells(i3, 3) + Border2
+Next i3
+
+'# For문 3 -Result
+For i2 = 12 To tbl_num
+    Cells(i2, 4).Value = Cells(3, 8) + " " + Cells(i2, 1) + "(" + TotalMessage + ")" + " " + Cells(4, 8) + " " + TotalMessage2 + " " + Cells(5, 8)
+Next i2
+
+End Sub
+
+
+Sub clear()
+
+Dim i, tbl_num, count1 As Integer
+
+tbl_num = Cells(3, 5) + 12
+count1 = 0
+
+For i = 12 To tbl_num
+    Cells(i, 4).Value = ""
+Next i
+
+End Sub

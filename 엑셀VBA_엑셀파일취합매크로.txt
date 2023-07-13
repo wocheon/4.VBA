@@ -1,0 +1,42 @@
+'여러 엑셀파일을 하나로 취합시 사용가능
+Dim fileNo as variant
+Dim i as Integer
+Dim ingFrile as workbook
+Dim Sumsheet as worksheet
+Dim irow as Integer 
+
+Set SumSheet =ThisWorkbook.Worksheets(1) 
+
+On Error GoTo 에러처리 
+
+fileNo = Application. GetOpenFilename(Filefilter:="엑셀파일(*.xlsx*),*.xlsx*, MultiSheet:=True) 
+
+Application.ScreenUpdating = true
+Application.DisplayAlerts = False 
+
+For i To UBound(fileNo) 
+
+Set ingFile = Workbooks.Open)Filename:=fileNo(i), ReadOnly:=True) 
+
+iRow = SumSheet.Range("A3").CurrentRegion.Rows.Count +3 
+
+SumSheet.Cells(iRow, 1).Value = fileNo(i) 
+
+With ingFile.Sheet(1).Range(ingFile.Sheet(1).Range("b2").End(xlDown), ingFile.Sheets(1).Range("b2").End(xlToRight)).Copy
+End With 
+
+SumSheet.Cells(iRow, 2).PasteSpecial
+ingFile.Close 
+
+Next i 
+
+Application.ScreenUpdating = true
+Application.DisplayAlerts = True 
+
+MSGBox "파일 취합 완료"
+Exit Sub 
+
+에러처리 :
+Msgbox "파일 선택 x" 
+
+End Sub
